@@ -17,7 +17,7 @@ else {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Beranda - PT. Multi Instrumentasi</title>
+    <title>Lihat Data User - PT. Multi Instrumentasi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -94,6 +94,7 @@ else {
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Beranda</a>
                         </li>
+
                         <li>
                             <a href="pengolahan_data_user.php"><i class="fa fa-table fa-fw"></i> Pengolahan Data User</a>
                         </li>
@@ -106,14 +107,37 @@ else {
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Beranda</h1>
+                    <h1 class="page-header">Data User</h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
-                    <h2 class="page-header">Selamat Datang Sistem Informasi PT. Multi Instrumentasi !</h2>
-
-                    <h4>Pada website kali ini akan memberikan fitur penambahan data pegawai, perubahan data pegawai, dan hapus data pegawai</h4>
-
+                  <h5><a href="input.php"> +Tambah Data User</a></h5>
+                  <table border="1" class="table">
+                    <tr class="info">
+                      <th>NO</th>
+                      <th>Nama</th>
+                      <th>Alamat</th>
+                      <th>Pekerjaan</th>
+                      <th>Opsi</th>
+                    </tr>
+                    <?php
+                    include 'koneksi.php';
+                    $query_mysql = mysql_query("SELECT * FROM user") or die(mysql_error());
+                    $nomor = 1;
+                    while ($data = mysql_fetch_array($query_mysql)) {
+                    ?>
+                    <tr>
+                      <td><?php echo $nomor++; ?></td>
+                      <td><?php echo $data['nama']; ?></td>
+                      <td><?php echo $data['alamat']; ?></td>
+                      <td><?php echo $data['pekerjaan']; ?></td>
+                      <td>
+                        <a class="edit" href="edit.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-primary">Edit Data</button></a>
+                        <a class="hapus" href="hapus.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-warning">Hapus Data</button></a>
+                      </td>
+                    </tr>
+                  <?php    } ?>
+                  </table>
                 </div>
             </div>
             <!-- /.row -->
