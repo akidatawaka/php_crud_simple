@@ -16,7 +16,7 @@ else {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pengolahan Data User - PT. Multi Instrumentasi</title>
+    <title>Pengolahan Data Bahan Baku - PT. Multi Instrumentasi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -106,15 +106,14 @@ else {
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Data User</h1>
+                    <h1 class="page-header">Data Bahan Baku</h1>
                 </div>
 
                 <div class="col-lg-12">
-
-                    <form action="pengolahan_data_user.php" method="post">
+                    <form action="pengolahan_data_bahanbaku.php" method="post">
                     <div class="sidebar-search">
                     <div class="input-group custom-search-form">
-                        <input type="text" name="katakunci" class="form-control" placeholder="Pencarian Data User">
+                        <input type="text" name="katakunci" class="form-control" placeholder="Pencarian Data Bahan Baku">
                         <span class="input-group-btn">
                         <input class="btn btn-default" type="submit" name="submit">
                             <i class="fa fa-search"></i>
@@ -128,13 +127,13 @@ else {
                 </div>
 
                 <div class="col-lg-12">
-                  <h5><a href="input.php"> +Tambah Data User </a> | <a href="pengolahan_data_user.php"> Tampilkan Keseluruhan Data</a></h5>
+                  <h5><a href="bahanbaku_input.php"> +Tambah Data Bahan Baku </a> | <a href="pengolahan_data_bahanbaku.php"> Tampilkan Keseluruhan Data</a></h5>
                   <table border="1" class="table">
                     <tr class="info">
-                      <th>NO</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Pekerjaan</th>
+                      <th>No</th>
+                      <th>Nama Barang</th>
+                      <th>Jenis Satuan</th>
+                      <th>Sub-Divisi Pemakai</th>
                       <th>Opsi</th>
                     </tr>
                     <?php
@@ -145,12 +144,12 @@ else {
                     if ($submit) {
                       //jika kata kunci tidak sama dengan kosong
                       if ($katakunci !="") {
-                        $query_mysql = mysql_query("SELECT * FROM user WHERE nama LIKE '%$katakunci%'") or die(mysql_error());
+                        $query_mysql = mysql_query("SELECT * FROM bahan_baku WHERE nama_barang_baku LIKE '%$katakunci%'") or die(mysql_error());
                       } else {
-                        $query_mysql = mysql_query("SELECT * FROM user") or die(mysql_error());
+                        $query_mysql = mysql_query("SELECT * FROM bahan_baku") or die(mysql_error());
                       }
                     } else {
-                        $query_mysql = mysql_query("SELECT * FROM user") or die(mysql_error());
+                        $query_mysql = mysql_query("SELECT * FROM bahan_baku") or die(mysql_error());
                     }
 
                     //mengecek pencarian data
@@ -164,12 +163,12 @@ else {
                     ?>
                     <tr>
                       <td><?php echo $nomor++; ?></td>
-                      <td><?php echo $data['nama']; ?></td>
-                      <td><?php echo $data['alamat']; ?></td>
-                      <td><?php echo $data['pekerjaan']; ?></td>
+                      <td><?php echo $data['nama_barang_baku']; ?></td>
+                      <td><?php echo $data['jenissatuan']; ?></td>
+                      <td><?php echo $data['subdivisi_pemakai']; ?></td>
                       <td>
-                        <a class="edit" href="edit.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-primary">Edit Data</button></a>
-                        <a class="hapus" href="hapus.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-warning">Hapus Data</button></a>
+                        <a class="edit" href="bahanbaku_edit.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-primary">Edit Data</button></a>
+                        <a class="hapus" href="bahanbaku_hapus.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-warning">Hapus Data</button></a>
                       </td>
                     </tr>
                   <?php    } }?>

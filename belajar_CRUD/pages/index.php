@@ -84,7 +84,16 @@ else {
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Beranda</a>
                         </li>
                         <li>
-                            <a href="pengolahan_data_user.php"><i class="fa fa-table fa-fw"></i> Pengolahan Data User</a>
+                            <a href="pengolahan_data_user.php"><i class="fa fa-users fa-fw"></i> Pengolahan Data User</a>
+                        </li>
+                        <li>
+                            <a href="pengolahan_data_bahanbaku.php"><i class="fa fa-archive fa-fw"></i> Pengolahan Data Bahan Baku</a>
+                        </li>
+                        <li>
+                            <a href="pengolahan_data_produk.php"><i class="fa fa-codepen fa-fw"></i> Pengolahan Data Produk</a>
+                        </li>
+                        <li>
+                            <a href="pengolahan_data_pemasok.php"><i class="fa fa-thumb-tack fa-fw"></i> Pengolahan Data Pemasok</a>
                         </li>
                 </div>
                 <!-- /.sidebar-collapse -->

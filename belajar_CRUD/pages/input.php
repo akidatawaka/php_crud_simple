@@ -80,27 +80,16 @@ else {
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Beranda</a>
                         </li>
-
                         <li>
-                            <a href="pengolahan_data_user.php"><i class="fa fa-table fa-fw"></i> Pengolahan Data User</a>
+                            <a href="pengolahan_data_user.php"><i class="fa fa-users fa-fw"></i> Pengolahan Data User</a>
+                        </li>
+                        <li>
+                            <a href="pengolahan_data_bahanbaku.php"><i class="fa fa-archive fa-fw"></i> Pengolahan Data Bahan Baku</a>
                         </li>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
             <!-- /.navbar-static-side -->
         </nav>
 
@@ -112,24 +101,19 @@ else {
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
                   <form action="input_aksi.php" method="post">
-                    <table>
-                      <tr>
-                        <td>Nama</td>
-                        <td><input type="text" name="nama"></td>
-                      </tr>
-                      <tr>
-                        <td>Alamat</td>
-                        <td><input type="text" name="alamat"></td>
-                      </tr>
-                      <tr>
-                        <td>Pekerjaan</td>
-                        <td><input type="text" name="pekerjaan"></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td><input type="submit" value="Simpan"></td>
-                      </tr>
-                    </table>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input class="form-control" type="text" name="nama">
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <input class="form-control" type="text" name="alamat">
+                    </div>
+                    <div class="form-group">
+                        <label>Pekerjaan</label>
+                        <input class="form-control" type="text" name="pekerjaan">
+                    </div>
+                    <input type="submit" value="Simpan" class="btn btn-default">
                   </form>
                 </div>
             </div>

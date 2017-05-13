@@ -10,13 +10,14 @@ else {
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pengolahan Data User - PT. Multi Instrumentasi</title>
+    <title>Tambah Data User - PT. Multi Instrumentasi</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,14 +44,8 @@ else {
 </head>
 
 <body>
-  <?php
-  $katakunci = (!empty($_POST["katakunci"]));
-  $submit = (!empty($_POST["submit"]));
-  /*
-  $katakunci = "";
-  $submit = "";
-   */?>
-      <div id="wrapper">
+
+    <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -94,86 +89,48 @@ else {
                         <li>
                             <a href="pengolahan_data_bahanbaku.php"><i class="fa fa-archive fa-fw"></i> Pengolahan Data Bahan Baku</a>
                         </li>
-                        <li>
-                            <a href="pengolahan_data_produk.php"><i class="fa fa-codepen fa-fw"></i> Pengolahan Data Produk</a>
-                        </li>
                 </div>
-                <!-- /.sidebar-collapse -->
-            </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        <?php
+        include 'koneksi.php';
+        $id = $_GET["id"];
+        $query_mysql = mysql_query("SELECT * FROM bahan_baku WHERE id='$id'") or die(mysql_error());
+        $nomor = 1;
+        while ($data = mysql_fetch_array($query_mysql)) {
+        ?>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Data User</h1>
+                    <h1 class="page-header">Edit Data Bahan Baku</h1>
                 </div>
-
+                <!-- /.col-lg-12 -->
                 <div class="col-lg-12">
-
-                    <form action="pengolahan_data_user.php" method="post">
-                    <div class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" name="katakunci" class="form-control" placeholder="Pencarian Data User">
-                        <span class="input-group-btn">
-                        <input class="btn btn-default" type="submit" name="submit">
-                            <i class="fa fa-search"></i>
-                        </input>
-
-                    </span>
+                  <form action="bahanbaku_edit_aksi.php" method="post">
+                    <div class="form-group">
+                        <label>Nama Barang</label>
+                        <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                        <input class="form-control" type="text" name="namabarang" value="<?php echo $data['nama_barang_baku']; ?>">
                     </div>
-                    <!-- /input-group -->
-                  </div>
+                    <div class="form-group">
+                        <label>Jenis Satuan</label>
+                        <select name="jenissatuan" class="form-control">
+                            <option value="" disabled="disabled" selected="selected">--Pilih Jenis Satuan--</option>
+                            <option value="Buah">Buah</option>
+                            <option value="Kg">Kg</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sub-Divisi Pemakai</label>
+                        <select name="divisipemakai" class="form-control">
+                            <option value="" disabled="disabled" selected="selected">--Pilih Divisi Pemakai--</option>
+                            <option value="Bagian Komponen Inner">Bagian Komponen Inner (Plastik)</option>
+                            <option value="Bagian Komponen Logam">Bagian Komponen Logam</option>
+                            <option value="Bagian Assembling">Bagian Assembling</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Ubah" class="btn btn-default">
                   </form>
-                </div>
-
-                <div class="col-lg-12">
-                  <h5><a href="input.php"> +Tambah Data User </a> | <a href="pengolahan_data_user.php"> Tampilkan Keseluruhan Data</a></h5>
-                  <table border="1" class="table">
-                    <tr class="info">
-                      <th>NO</th>
-                      <th>Nama</th>
-                      <th>Alamat</th>
-                      <th>Pekerjaan</th>
-                      <th>Opsi</th>
-                    </tr>
-                    <?php
-                    include 'koneksi.php';
-
-                    $katakunci = $_POST["katakunci"];
-                    $submit = $_POST["submit"];
-                    if ($submit) {
-                      //jika kata kunci tidak sama dengan kosong
-                      if ($katakunci !="") {
-                        $query_mysql = mysql_query("SELECT * FROM user WHERE nama LIKE '%$katakunci%'") or die(mysql_error());
-                      } else {
-                        $query_mysql = mysql_query("SELECT * FROM user") or die(mysql_error());
-                      }
-                    } else {
-                        $query_mysql = mysql_query("SELECT * FROM user") or die(mysql_error());
-                    }
-
-                    //mengecek pencarian data
-                    $nomor = 1;
-                    $cek = mysql_num_rows($query_mysql);
-                    if ($cek < 1) {
-                    ?>
-                    <h3>Data Tidak Ditemukan</h3>
-                    <?php } else {
-                        while ($data = mysql_fetch_array($query_mysql)) {
-                    ?>
-                    <tr>
-                      <td><?php echo $nomor++; ?></td>
-                      <td><?php echo $data['nama']; ?></td>
-                      <td><?php echo $data['alamat']; ?></td>
-                      <td><?php echo $data['pekerjaan']; ?></td>
-                      <td>
-                        <a class="edit" href="edit.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-primary">Edit Data</button></a>
-                        <a class="hapus" href="hapus.php?id=<?php echo $data['id']; ?>"><button type="button" class="btn btn-warning">Hapus Data</button></a>
-                      </td>
-                    </tr>
-                  <?php    } }?>
-                  </table>
                 </div>
             </div>
             <!-- /.row -->
@@ -203,4 +160,4 @@ else {
 </body>
 
 </html>
-<?php } ?>
+<?php } }?>
